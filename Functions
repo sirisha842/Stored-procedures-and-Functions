@@ -1,0 +1,130 @@
+Function – show you how to develop a PL/SQL function and explain to you various ways to call a function.
+
+--sum of digits of a number 
+ 
+ create or replace function sum1(a in number)
+ return number is
+ re number ;
+ x number;
+ z number;
+ su number :=0;
+ quot number;
+ begin
+ x :=a;
+ while x>0 loop
+ 
+ re := mod(x,10);
+ quot := trunc(x/10);
+  su := su + re;
+ x := quot;
+ end loop;
+ z :=su;
+ return z;
+ end;
+ 
+ select sum1(1345) from dual;
+ 
+-- getting name of emplooyee by eno
+create or replace function name(eno in number) 
+return varchar2 is
+empname varchar2(20);
+begin
+select ename into empname from emp where empno=eno;
+return empname;
+end;
+
+select name(7902) from dual;
+
+ select * from emp;
+ 
+ 
+ 
+ --sum of fibonacci 
+ create or replace function fib(n in number)
+ return number is
+ a number :=0;
+ b number :=1;
+ c number;
+
+ begin  
+  
+ for i in 2..n loop
+    c:=a+b;
+    a:=b;
+    b:=c;
+ --dbms_output.put_line(fib());
+    end loop;
+    return c;
+end ;
+
+select fib(6) from dual;
+set serveroutput on;
+declare
+n number:='&number';
+begin
+dbms_output.put_line(0);
+dbms_output.put_line(1);
+
+for i in 1..n loop
+dbms_output.put_line(fib(i));
+end loop;
+end;
+
+
+--factorial of a number
+create or replace function fact(n in number)
+return number is
+x number;
+res number :=1;
+begin
+x:=n;
+while x>0 loop
+res := res*x;
+x :=x-1;
+end loop;
+return res;
+end;
+
+select fact(15) from dual;
+
+--greatest among three numbers
+create or replace function maxthree(x in number,y in number, z in number)
+return number is
+
+a number;
+b number;
+c number;
+begin
+a := x;
+b := y;
+c := z;
+if a>b and a>c then
+return a;
+elsif b>a and b>c then
+return b;
+else
+return c;
+end if;
+
+end;
+
+select maxthree(3,6,5)from dual;
+
+
+
+
+
+create or replace function pattern(n in number)
+return number is
+begin
+for i in 1..n loop
+for j in 1..n loop
+dbms_output.put_line('*');
+end loop;
+dbms_output.put_line('*');
+end loop;
+end;
+
+select pattern(4) from dual;
+
+
