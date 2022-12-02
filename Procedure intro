@@ -1,0 +1,16 @@
+Procedure – a step-by-step guide to create, compile and execute a procedure from Oracle SQL Developer.
+
+create or replace procedure dep(eno in number,dept out number)
+is
+begin 
+select deptno into dept from emp where empno=eno;
+end;
+
+set serveroutput on
+declare
+eno emp.empno%type:=7782;
+dept1 emp.deptno%type;
+begin
+dep(eno,dept1);
+dbms_output.put_line('The deptno is'||dept1);
+end;
