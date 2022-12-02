@@ -1,0 +1,23 @@
+Implicit statement results  – learn how to return one or more result sets from a procedure.
+
+create or replace function maxthree(x in number,y in number, z in number)
+return number is
+
+a number;
+b number;
+c number;
+begin
+a := x;
+b := y;
+c := z;
+if a>b and a>c then
+return a;
+elsif b>a and b>c then
+return b;
+else
+return c;
+end if;
+
+end;
+
+select maxthree(3,6,5)from dual;
